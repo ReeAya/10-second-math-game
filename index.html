@@ -20,16 +20,20 @@
     <title>10 Second Math Game</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container d-flex justify-content-center p-5 rounded">
       <div class="row">
         <div class="col-xs-12">
-          <h2>10 Second Maths Game</h2>
+          <h2 class="mb-5">10 Second Maths Game</h2>
+          <div class="game">
+            <h3 id="time-left"></h3>
 
-          <h3 id="time-left"></h3>
+            <h4 class="mb-3">SCORE: <span id="score"></span></h4>
+            <h1 id="equation"></h1>
 
-          <h1 id="equation"></h1>
-
-          <input id="user-input" type="number" />
+            <p class="mt-3">Please enter your answer below ⬇</p>
+            <input " id="user-input" type="number" name="input-number" />
+          </div>
+          <h5 class="game-end">Thanks for playing!</h5>
         </div>
       </div>
     </div>

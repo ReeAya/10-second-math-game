@@ -1,6 +1,7 @@
 $(document).ready(function () {
   let currentQuestion;
   let timeLeft = 10;
+  let score = 0;
   let interval;
   // random number generator
   let randomNumberGenerator = function (size) {
@@ -67,13 +68,8 @@ $(document).ready(function () {
       functionArray[Math.floor(Math.random() * functionArray.length)]();
     return ques;
   };
-  // console.log(getQuestion());
 
   //   event listener
-
-  //   $("#user-input").on("keyup", function () {
-  //     console.log($(this).val());
-  //   });
 
   //   get question
   let renderNewQuestion = function () {
@@ -86,6 +82,7 @@ $(document).ready(function () {
       renderNewQuestion();
       $("#user-input").val("");
       updateTimeLeft(+1);
+      updateScore(+1);
     }
   };
 
@@ -93,6 +90,7 @@ $(document).ready(function () {
     if (!interval) {
       if (timeLeft === 0) {
         updateTimeLeft(10);
+        updateScore(-score);
       }
       interval = setInterval(function () {
         updateTimeLeft(-1);
@@ -100,6 +98,14 @@ $(document).ready(function () {
         if (timeLeft === 0) {
           clearInterval(interval);
           interval = undefined;
+          let again = confirm("Would you like to play again?");
+          if (again) {
+            updateTimeLeft(10);
+            playGame();
+          } else {
+            $(".game").addClass("game-end");
+            $("h5").removeClass("game-end");
+          }
         }
       }, 1000);
     }
@@ -109,11 +115,18 @@ $(document).ready(function () {
     timeLeft += amount;
     $("#time-left").text("You have " + timeLeft + " seconds left!");
   };
+  let updateScore = function (amount) {
+    score += amount;
+    $("#score").text(score);
+  };
 
-  renderNewQuestion();
+  let playGame = function () {
+    renderNewQuestion();
+    $("#user-input").on("keyup", function () {
+      startGame();
+      checkAnswer(Number($(this).val()), currentQuestion.answer);
+    });
+  };
 
-  $("#user-input").on("keyup", function () {
-    startGame();
-    checkAnswer(Number($(this).val()), currentQuestion.answer);
-  });
+  playGame();
 });
