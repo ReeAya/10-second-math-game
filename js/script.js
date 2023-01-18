@@ -26,7 +26,12 @@ $(document).ready(function () {
     let num2 = randomNumberGenerator(10);
 
     question.answer = num1 - num2;
-    question.equation = String(num1) + " - " + String(num2);
+    if (question.answer > 0) {
+      question.equation = String(num1) + " - " + String(num2);
+    } else if (question.answer < 0) {
+      question.answer = num2 - num1;
+      question.equation = String(num2) + " - " + String(num1);
+    }
 
     return question;
   };
@@ -47,7 +52,7 @@ $(document).ready(function () {
     let num1 = randomNumberGenerator(10);
     let num2 = randomNumberGenerator(10);
 
-    question.answer = num1 / num2;
+    question.answer = Math.floor(num1 / num2);
     question.equation = String(num1) + " ÷ " + String(num2);
 
     return question;
