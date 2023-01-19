@@ -51,9 +51,11 @@ $(document).ready(function () {
     let question = {};
     let num1 = randomNumberGenerator(10);
     let num2 = randomNumberGenerator(10);
+    let num3;
 
-    question.answer = Math.floor(num1 / num2);
-    question.equation = String(num1) + " ÷ " + String(num2);
+    num3 = num1 * num2;
+    question.answer = num2;
+    question.equation = String(num3) + " ÷ " + String(num1);
 
     return question;
   };
@@ -105,6 +107,7 @@ $(document).ready(function () {
           interval = undefined;
           let again = confirm("Would you like to play again?");
           if (again) {
+            $("#user-input").val("");
             updateTimeLeft(10);
             playGame();
           } else {
